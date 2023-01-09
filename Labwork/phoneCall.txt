@@ -1,0 +1,66 @@
+Phone_call.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="OS_Practicals.Phone_call">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ed_number_call"
+        android:hint="Enter Number"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_call"
+        android:drawableLeft="@drawable/ic_baseline_call_24"
+        android:text="Call"
+        />
+
+
+</LinearLayout>
+
+
+
+Phone_call.kt
+
+package OS_Practicals
+
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import androidx.annotation.RequiresApi
+import com.example.jan6.R
+import java.util.jar.Manifest
+
+class Phone_call : AppCompatActivity() {
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_phone_call)
+
+    requestPermissions(arrayOf(android.Manifest.permission.CALL_PHONE),1)
+
+        var ed = findViewById<EditText>(R.id.ed_number_call)
+        var btn = findViewById<Button>(R.id.btn_call)
+
+        btn.setOnClickListener {
+            var intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse("tel:"+ed.text.toString())
+            startActivity(intent)
+        }
+    }
+}
