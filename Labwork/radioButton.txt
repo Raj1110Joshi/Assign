@@ -1,0 +1,68 @@
+RadioButton.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RadioButtonEx">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rg"
+        tools:ignore="MissingConstraints">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rb_male"
+            android:text="Male"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rb_female"
+            android:text="Female"/>
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+RadioButton.kt
+
+package com.example.firstone
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.RadioGroup
+import android.widget.Toast
+
+class RadioButtonEx : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_radio_button)
+
+        var radioGroup = findViewById<RadioGroup>(R.id.rg)
+
+        radioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener{radioGroup, i->
+
+            if (i==R.id.rb_male)
+            {
+                Toast.makeText(this, "Male", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                Toast.makeText(this, "Female", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+
+
+
+    }
+}

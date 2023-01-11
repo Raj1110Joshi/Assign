@@ -1,0 +1,381 @@
+Database_handler.kt
+
+package com.example.login.SQLITE_Example
+
+import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.content.Context
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
+import android.database.sqlite.SQLiteOpenHelper
+import androidx.core.content.contentValuesOf
+import java.lang.reflect.Array
+
+class Database_Handler(context: Context):SQLiteOpenHelper(context,Database_Handler.DB_NAME,null,Database_Handler.DB_VERSION)
+{
+    override fun onCreate(db: SQLiteDatabase?)
+    {
+     var create_table = "CREATE TABLE $TABLE_NAME ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $NAME VARCHAR(20),$SUBJECT VARCHAR(20) )";
+
+        db?.execSQL(create_table)
+    }
+
+    override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
+        TODO("Not yet implemented")
+    }
+
+    fun addStudentData(studentModel: StudentModel):Long
+    {
+        var db = this.writableDatabase
+        var cv = ContentValues()
+
+        cv.put("$NAME",studentModel.name)
+        cv.put("$SUBJECT",studentModel.subject)
+        var id = db.insert(TABLE_NAME,null,cv)
+        return id
+    }
+
+    @SuppressLint("Range")
+    fun getallData(): MutableList<StudentModel>
+    {
+        var mystudentlist : MutableList<StudentModel> = ArrayList()
+        var sql_qry = "select * from student"
+
+        var cursor : Cursor
+        var mydb = this.readableDatabase
+
+        try
+        {
+            cursor = mydb.rawQuery(sql_qry,null)
+        }
+        catch (e:SQLiteException)
+        {
+            mydb.execSQL(sql_qry)
+            return ArrayList()
+        }
+
+        var s_id : Int
+        var s_name : String
+        var s_subject : String
+
+        if (cursor.count>0)
+        {
+            if (cursor.moveToFirst())
+            {
+                do
+                {
+                 s_id = cursor.getInt(cursor.getColumnIndex(ID))
+                 s_name = cursor.getString(cursor.getColumnIndex(NAME))
+                 s_subject = cursor.getString(cursor.getColumnIndex(SUBJECT))
+
+                    var s_data = StudentModel(id = s_id, name = s_name,subject = s_subject)
+                    mystudentlist.add(s_data)
+//                    mystudentlist.add(StudentModel(s_id,s_name,s_subject))
+                }
+                    while (cursor.moveToNext())
+            }
+        }
+        return mystudentlist
+    }
+
+    fun updateData(studentModel: StudentModel):Int
+    {
+        var mydb = writableDatabase
+        var cv = ContentValues()
+
+        cv.put(NAME,studentModel.name)
+        cv.put(SUBJECT,studentModel.subject)
+
+        // update table set name = "ANjali" where id  = 1
+        var id = mydb.update(TABLE_NAME,cv,ID+" = "+studentModel.id,null)
+        mydb.close()
+        return id
+    }
+
+    fun deleteData(studentModel: StudentModel):Int
+    {
+        var db = this.writableDatabase
+        var delete_query = db.delete(TABLE_NAME, ID+" = "+studentModel.id,null)
+        db.close()
+        return delete_query
+    }
+
+    companion object
+    {
+        var DB_NAME="mydb_sqlite"
+        var DB_VERSION=1
+        var TABLE_NAME = "student"
+        var ID = "id"
+        var NAME = "name"
+        var SUBJECT = "subject"
+    }
+}
+
+
+
+
+Database_ex.kt
+
+package com.example.login.SQLITE_Example
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.login.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
+class Database_ex : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_database_ex)
+
+
+        var fab = findViewById<FloatingActionButton>(R.id.fab_add)
+        var rev = findViewById<RecyclerView>(R.id.rec_vu_db)
+
+        rev.layoutManager = LinearLayoutManager(this@Database_ex)
+
+        fab.setOnClickListener{
+
+            var i= Intent(this@Database_ex,DB_Add_student::class.java)
+            finish()
+            startActivity(i)
+        }
+
+        var mydb = Database_Handler(this)
+
+        var mystudentList : MutableList<StudentModel> = ArrayList()
+        mystudentList = mydb.getallData()
+
+        var myadapter =MyAdapter_SQLDB(this@Database_ex,mystudentList)
+        rev.adapter = myadapter
+    }
+}
+
+
+
+
+
+Database_ex.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SQLITE_Example.Database_ex">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fab_add"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_baseline_add_24"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rec_vu_db">
+    </androidx.recyclerview.widget.RecyclerView>
+</FrameLayout>
+
+
+
+
+DB_add_student.kt
+
+package com.example.login.SQLITE_Example
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import com.example.login.R
+
+class DB_Add_student : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_db_add_student)
+
+
+        var ed_name = findViewById<EditText>(R.id.ed_name_db)
+        var ed_subject = findViewById<EditText>(R.id.ed_subject_db)
+
+        var btn_save = findViewById<Button>(R.id.btn_save_db)
+
+        var mydatabasehandler = Database_Handler(this@DB_Add_student)
+        var id:Int
+
+        btn_save.setOnClickListener{
+            var insertId = mydatabasehandler.addStudentData(StudentModel(it.id!!,ed_name.text.toString(),
+                                                                                ed_subject.text.toString()))
+
+            if (insertId>0)
+            {
+                Toast.makeText(this@DB_Add_student, "Data Inserted Successfully", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+    }
+}
+
+
+
+
+DB_add_student.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SQLITE_Example.DB_Add_student">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter name"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:id="@+id/ed_name_db"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter subject"
+        android:id="@+id/ed_subject_db"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_save_db"
+        android:text="SAVE"
+        android:layout_margin="20dp"
+        />
+</LinearLayout>
+
+
+
+
+Student_model.kt
+
+package com.example.login.SQLITE_Example
+
+class StudentModel
+    (
+    var id : Int =0,
+    var name:String="",
+    var subject:String=""
+
+)
+{
+
+    }
+
+
+
+
+
+MyAdapter_SQLDB.kt
+
+package com.example.login.SQLITE_Example
+
+import android.app.Activity
+import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.appcompat.view.menu.ActionMenuItemView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.login.MyAdapter
+import com.example.login.R
+
+class MyAdapter_SQLDB (var context: Context,var studentList: MutableList<StudentModel>):RecyclerView.Adapter<MyAdapter_SQLDB.Myclass>()
+{
+    class Myclass(itemView: View) : RecyclerView.ViewHolder(itemView)
+    {
+        var name = itemView.findViewById<TextView>(R.id.tv_db_name)
+        var subject = itemView.findViewById<TextView>(R.id.tv_db_subject)
+
+        var btn_edit =itemView.findViewById<Button>(R.id.edit_db)
+        var btn_delete =itemView.findViewById<Button>(R.id.del_db)
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Myclass {
+        var v = LayoutInflater.from(parent.context).inflate(R.layout.mydb_rowlayout,parent,false)
+        return Myclass(v)
+    }
+
+    override fun onBindViewHolder(holder: Myclass, position: Int)
+    {
+        var mystudentList = studentList[position]
+
+        holder.name.setText(mystudentList.name)
+        holder.subject.setText(mystudentList.subject)
+
+        holder.btn_edit.setOnClickListener{
+            var d = Dialog(context)
+
+            d.setContentView(R.layout.edit_dialog)
+            d.show()
+
+            var edtext = d.findViewById<EditText>(R.id.ed_text)
+            var btn = d.findViewById<Button>(R.id.btn_update_dialog)
+
+            edtext.setText(mystudentList.name)
+
+            btn.setOnClickListener{
+                var mydb = Database_Handler(context)
+
+                var mystudentModel = StudentModel(mystudentList.id,
+                                                    edtext.text.toString(),
+                                                    mystudentList.subject.toString())
+
+                mydb.updateData(mystudentModel)
+
+                var i= Intent(context,Database_ex::class.java)
+                (context as Activity).finish()
+                context.startActivity(i)
+            }
+        }
+
+        holder.btn_delete.setOnClickListener {
+            var mydb = Database_Handler(context)
+
+            var studentModel =
+                StudentModel(mystudentList.id, mystudentList.name, mystudentList.subject)
+            mydb.deleteData(studentModel)
+            var i = Intent(context, Database_ex::class.java)
+            (context as Activity).finish()
+            context.startActivity(i)
+        }
+    }
+
+    override fun getItemCount(): Int
+    {
+        return studentList.size
+    }
+
+
+}
+

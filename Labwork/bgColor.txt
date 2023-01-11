@@ -1,0 +1,99 @@
+Values ->
+colors.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#1E83B1</color>
+    <color name="green">#32B637</color>
+    <color name="yellow">#32B637</color>
+    <color name="pink">#32B637</color>
+    <color name="red">#32B637</color>
+
+</resources>
+
+
+
+
+
+bgcolor.xml / tsk1.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/my_container"
+    tools:context=".Tsk1">
+
+    <Button
+        android:id="@+id/btnblk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Black"
+        android:textSize="30dp"
+        />
+
+    <Button
+        android:id="@+id/btnblue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blue"
+        android:textSize="30dp"
+        />
+
+    <Button
+        android:id="@+id/btngreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Green"
+        android:textSize="30dp"
+        />
+
+</LinearLayout>
+
+
+
+
+bgcolor.kt / tsk1.kt
+
+package com.example.firstone
+
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+
+class Tsk1 : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_tsk1)
+
+        var maincontainer = findViewById<LinearLayout>(R.id.my_container)
+
+
+        var btnblk = findViewById<Button>(R.id.btnblk)
+        var btnblue = findViewById<Button>(R.id.btnblue)
+        var btngreen = findViewById<Button>(R.id.btngreen)
+
+        btnblk.setOnClickListener {  maincontainer.setBackgroundColor(getColor(R.color.black))
+        }
+        btnblue.setOnClickListener {         maincontainer.setBackgroundColor(getColor(R.color.blue))
+        }
+        btngreen.setOnClickListener {         maincontainer.setBackgroundColor(getColor(R.color.green))
+        }
+
+    }
+}
