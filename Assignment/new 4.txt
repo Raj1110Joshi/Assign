@@ -1,0 +1,757 @@
+four1
+
+                .XML 
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.practical.four1">
+
+    <EditText
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:id="@+id/ed_input"
+        android:hint="Enter Number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txt_reversenumber"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
+
+              .KOTLIN 
+              
+package com.example.practical
+
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+
+class Assignment_1_Reverse_number : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_assignment1_reverse_number)
+
+        var ed = findViewById<EditText>(R.id.ed_input)
+        var txt = findViewById<TextView>(R.id.txt_reversenumber)
+
+        ed.setOnClickListener {
+            val stringReverse_number = ed.text.toString().reversed()
+            txt.text = stringReverse_number
+        }
+    }
+}
+
+
+
+
+
+************************************************************************
+four2
+
+           .XML       
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Assignment_2_input_two_number_nextActivity">
+
+    <EditText
+        android:hint="Enter number 1"
+        android:id="@+id/ed_number1"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:hint="Enter number 2"
+        android:id="@+id/ed_number2"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:text="SUBMIT"
+        android:layout_margin="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+
+
+           2nd Activity.XML
+           
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".four2">
+
+    <TextView
+        android:id="@+id/txt_display1"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txt_display2"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
+
+
+              .KT     
+              
+package com.example.freshone
+
+import android.annotation.SuppressLint
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+
+class Assignment_2_input_two_number_nextActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_assignment2_input_two_number_next)
+
+        var ed1 = findViewById<EditText>(R.id.ed_number1)
+        var ed2 = findViewById<EditText>(R.id.ed_number2)
+        var btn = findViewById<Button>(R.id.btn_submit)
+
+
+        btn.setOnClickListener {
+            var i = Intent(this@Assignment_2_input_two_number_nextActivity,Assignment_2_display_next_activity::class.java)
+            i.putExtra("data",ed1.text.toString())
+            i.putExtra("data1",ed2.text.toString())
+            startActivity(i)
+
+        }
+
+    }
+}
+
+
+			2nd .KT
+			
+package com.example.freshone
+
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.EditText
+import android.widget.TextView
+
+class Assignment_2_display_next_activity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_assignment2_display_next)
+
+        var txt = findViewById<TextView>(R.id.txt_display1)
+        var txt1 = findViewById<TextView>(R.id.txt_display2)
+
+
+        var j = intent
+        var fetchText = j.getStringExtra("data")
+        var fetchText1 = j.getStringExtra("data1")
+        txt.text = fetchText
+        txt1.text = fetchText1
+    }
+}
+
+
+************************************************************************
+
+four3
+
+				.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".four3">
+
+    <EditText
+        android:id="@+id/ed1"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:hint="Enter Number1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/ed2"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:hint="Enter Number2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioButton
+            android:id="@+id/rg_add"
+            android:text="ADD"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/rg_sub"
+            android:text="SUB"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/rg_mul"
+            android:text="MUL"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/rg_div"
+            android:text="DIV"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_calculator"
+            android:textStyle="bold"
+            android:hint="CALCULATOR"
+            android:layout_margin="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textSize="20dp"
+            android:id="@+id/txt_result"
+            android:text="Result: 0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RadioGroup>
+
+</LinearLayout>
+
+
+                 .kt
+                 
+package com.example.freshone
+
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
+import com.example.myfirstapplication.RadioButton as RadioButton1
+
+class Assignment_3_RB_using_Calculator : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_assignment3_rb_using_calculator)
+
+        var ed1 = findViewById<EditText>(R.id.ed1)
+        var ed2 = findViewById<EditText>(R.id.ed2)
+
+        var radiogroup = findViewById<RadioGroup>(R.id.rg)
+        var add = findViewById<RadioButton>(R.id.rg_add)
+        var sub = findViewById<RadioButton>(R.id.rg_sub)
+        var mul = findViewById<RadioButton>(R.id.rg_mul)
+        var div = findViewById<RadioButton>(R.id.rg_div)
+
+        var btn = findViewById<Button>(R.id.btn_calculator)	
+
+        var txt = findViewById<TextView>(R.id.txt_result)
+
+       radiogroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
+            btn.setOnClickListener {
+                var t1 = ed1.text.toString().toInt()
+                var t2 = ed2.text.toString().toInt()
+                var total = add(t1,t2)
+                txt.text = total.toString()
+            }
+           radiogroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
+               btn.setOnClickListener {
+                   var t1 = ed1.text.toString().toInt()
+                   var t2 = ed2.text.toString().toInt()
+                   var total1 = sub(t1,t2)
+                   txt.text = total1.toString()
+               }
+               radiogroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
+                   btn.setOnClickListener {
+                       var t1 = ed1.text.toString().toInt()
+                       var t2 = ed2.text.toString().toInt()
+                       var total2 = mul(t1,t2)
+                       txt.text = total2.toString()
+                   }
+                   radiogroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
+                       btn.setOnClickListener {
+                           var t1 = ed1.text.toString().toInt()
+                           var t2 = ed2.text.toString().toInt()
+                           var total3 = div(t1,t2)
+                           txt.text = total3.toString()
+                       }
+                   })
+               })
+           })
+        })
+    }
+
+    fun add(a: Int, b: Int): Int {
+        return a + b
+    }
+    fun sub(a: Int, b: Int): Int {
+        return a - b
+    }
+    fun mul(a: Int, b: Int): Int {
+        return a * b
+    }
+    fun div(a: Int, b: Int): Int {
+        return a / b
+    }
+}
+
+
+
+*********************************************************************
+
+four4
+
+                 XML FILE
+
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".four4">
+
+    <TableRow
+        android:background="@android:color/holo_green_light"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtRoll"
+            android:textStyle="bold"
+            android:text="Roll"
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtName"
+            android:textStyle="bold"
+            android:text="Name"
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtCity"
+            android:textStyle="bold"
+            android:text="City"
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtRoll1"
+            android:text="textViw"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtName1"
+            android:text="textViw"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtCity1"
+            android:text="textViw"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtRoll2"
+            android:text="textViw"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtName2"
+            android:text="textViw"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtCity2"
+            android:text="textViw"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </TableRow>
+
+</TableLayout>
+
+
+                 .kt
+                 
+package com.example.freshone
+
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+
+class four4 : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four4)
+
+        var c1 = findViewById<TextView>(R.id.txtRoll1)
+        var c2 = findViewById<TextView>(R.id.txtName1)
+        var c3 = findViewById<TextView>(R.id.txtCity1)
+        var c4 = findViewById<TextView>(R.id.txtRoll2)
+        var c5 = findViewById<TextView>(R.id.txtName2)
+        var c6 = findViewById<TextView>(R.id.txtCity2)
+
+        var roll = mutableListOf<Int>(1,2)
+        var name = mutableListOf<String>("ROHIT","KOHLI")
+        var city = mutableListOf<String>("AHMEDABAD","RAJKOT")
+
+        c1.text = roll.get(0).toString()
+        c2.text = name.get(0).toString()
+        c3.text = city.get(0).toString()
+        c4.text = roll.get(1).toString()
+        c5.text = name.get(1).toString()
+        c6.text = city.get(1).toString()
+
+
+    }
+}                 
+                 
+********************************************************************
+
+
+four5
+
+					.XML
+					
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".four5">
+
+    <TextView
+        android:layout_marginBottom="50dp"
+        android:text="Hello World"
+        android:gravity="center"
+        android:id="@+id/txt_tv"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_plus"
+        android:hint="+"
+        android:textSize="30dp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/btn_minus"
+        android:hint="-"
+        android:textSize="30dp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"/>
+</LinearLayout>
+
+
+
+			.KT                
+			
+package com.example.freshone
+
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.TypedValue
+import android.widget.Button
+import android.widget.TextView
+
+class four5 : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four5)
+
+        var txt = findViewById<TextView>(R.id.txt_tv)
+        var plus = findViewById<Button>(R.id.btn_plus)
+        var minus = findViewById<Button>(R.id.btn_minus)
+        var ourFontSize = 14f
+
+        plus.setOnClickListener {
+            ourFontSize += 4f
+            txt.setTextSize(TypedValue.COMPLEX_UNIT_SP,ourFontSize)
+        }
+        minus.setOnClickListener {
+            ourFontSize -= 4f
+            txt.setTextSize(TypedValue.COMPLEX_UNIT_SP,ourFontSize)
+        }
+    }
+}                
+
+***********************************************************************
+
+four6
+
+	                 .XML 
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".four6">
+
+    <SearchView
+        android:queryHint="Enter Name"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent"
+        android:background="@drawable/searchview_background"
+        android:id="@+id/searchview"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/userList"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+
+
+				.KT 
+                
+package com.example.freshone
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.SearchView
+import android.widget.Toast
+
+class four6 : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four6)
+
+        var sv = findViewById<SearchView>(R.id.searchview)
+        var lv = findViewById<ListView>(R.id.userList)
+
+        val names = arrayOf("Android","Java","PHP","Kotlin","Python","c++")
+
+        val adapter : ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_list_item_1,names)
+
+        lv.adapter = adapter
+
+        sv.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                sv.clearFocus()
+                if (names.contains(p0))
+                {
+                    adapter.filter.filter(p0)
+                }else
+                {
+                    Toast.makeText(applicationContext, "Item not found", Toast.LENGTH_SHORT).show()
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                adapter.filter.filter(p0)
+                return false
+            }
+
+        })
+        }
+    }
+                 
+**********************************************************************
+
+four7
+
+                 XML FILE
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/display_color"
+    tools:context=".Assignment_7_Display_Color_using_Radio_Button">
+
+    <RadioGroup
+        android:layout_marginTop="30dp"
+        android:id="@+id/rg"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioButton
+            android:layout_margin="10dp"
+            android:id="@+id/rg_red"
+            android:text="RED"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:layout_margin="10dp"
+            android:id="@+id/rg_blue"
+            android:text="BLUE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:layout_margin="10dp"
+            android:id="@+id/rg_green"
+            android:text="GREEN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RadioGroup>
+</LinearLayout>
+
+
+               KOTLIN FILE
+               
+package com.example.practical
+
+import android.annotation.SuppressLint
+import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
+
+class four7 : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four7)
+
+        var radioGroup = findViewById<RadioGroup>(R.id.rg)
+        var red =findViewById<RadioButton>(R.id.rg_red)
+        var blue =findViewById<RadioButton>(R.id.rg_blue)
+        var green =findViewById<RadioButton>(R.id.rg_green)
+
+        var layout =findViewById<LinearLayout>(R.id.display_color)
+
+        radioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener{radioGroup, i ->
+            red.setOnClickListener {
+                layout.setBackgroundColor(Color.RED)
+            }
+
+            blue.setOnClickListener {
+                layout.setBackgroundColor(Color.BLUE)
+            }
+
+            green.setOnClickListener {
+                layout.setBackgroundColor(Color.GREEN)
+            }
+        })
+    }
+}                                 
