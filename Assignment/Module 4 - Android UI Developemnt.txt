@@ -754,4 +754,499 @@ class four7 : AppCompatActivity() {
             }
         })
     }
-}                                 
+}                   
+
+four8
+                   .XML
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".four8">
+
+    <Editext
+        android:layout_marginTop="20dp"
+        android:id="@+id/viewStub"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout="@layout/new_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="HIDE"
+        android:id="@+id/hide"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="SHOW"
+        android:id="@+id/show"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="65dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
+
+
+                New Layout.XML
+                
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:textSize="50dp"
+        android:text="Hello Android"
+        android:id="@+id/txtView"
+        android:layout_margin="30dp"
+        android:layout_width="350dp"
+        android:layout_height="300dp"/>
+
+</LinearLayout>
+
+
+               .KT 
+               
+package com.example.freshone
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.view.ViewStub
+import android.widget.Button
+
+class Assignment_8_FirstButtonClick_to_Hide_And_SecondButtonClick_to_Show : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four8)
+
+        var btnHide = findViewById<Button>(R.id.hide)
+        var btnShow = findViewById<Button>(R.id.show)
+
+        var viewStub = findViewById<ViewStub>(R.id.viewStub)
+        viewStub.inflate()
+
+        btnHide.setOnClickListener {
+            viewStub.setVisibility(View.GONE)
+        }
+
+        btnShow.setOnClickListener {
+            viewStub.setVisibility(View.VISIBLE)
+        }
+    }
+}                              
+
+********************************************************************
+
+four9
+
+                .XML 
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3B7C6"
+    android:orientation="vertical"
+    tools:context=".four9">
+
+    <ListView
+        android:entries="@array/sports"
+        android:id="@+id/sportdata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
+
+
+             String 
+             
+<resources>
+    <string name="app_name">Practical</string>
+
+    <string-array name="sports">
+        <item>Cricket</item>
+        <item>Football</item>
+        <item>Tennis</item>
+        <item>Golf</item>
+    </string-array>
+
+</resources>       
+
+
+             .KT
+             
+package com.example.practical
+
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.ListView
+import android.widget.Toast
+
+class four9 : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four9)
+
+        var sd = findViewById<ListView>(R.id.sportdata)
+
+        sd.setOnItemClickListener { adapterView, view, i, l ->
+            Toast.makeText(this, ""+sd.getItemAtPosition(i), Toast.LENGTH_SHORT).show()
+        }
+    }
+}                   
+
+
+***********************************************************************
+four10
+
+               .XML 
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".four10">
+
+    <EditText
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:id="@+id/ed_number"
+        android:hint="Enter Number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_gravity="center"
+        android:text="Submit Data"
+        android:id="@+id/btn_submit_eddata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/ed_displaydetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
+
+
+               .KT
+               
+package com.example.freshone
+
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ListView
+
+class four10 : AppCompatActivity() {
+
+    var myarryList:ArrayList<String> = ArrayList()
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four10)
+
+        var ed = findViewById<EditText>(R.id.ed_number)
+        var btn = findViewById<Button>(R.id.btn_submit_eddata)
+        var eddata = findViewById<ListView>(R.id.ed_displaydetails)
+
+        btn.setOnClickListener {
+            myarryList.add(ed.text.toString())
+            ed.text.clear()
+            var myadapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,myarryList)
+                
+            eddata.adapter = myadapter
+        }
+    }
+} 
+
+**********************************************************************
+four11
+
+               .XML 
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".four11">
+
+    <include
+        android:id="@+id/customtoolbar"
+      layout="@layout/custom_toolbar">
+    </include>
+
+</LinearLayout>
+
+
+            Custom Toolbar.XML
+            
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:id="@+id/toolbar"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/youtube"
+        android:layout_width="80dp"
+        android:layout_height="40dp"/>
+
+</androidx.appcompat.widget.Toolbar>
+
+
+            menu.XML
+            
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@drawable/ic_baseline_cast_24"
+        app:showAsAction="always"
+        android:id="@+id/cast"
+        tools:ignore="MenuTitle" />
+
+    <item
+        android:icon="@drawable/ic_baseline_notifications_24"
+        app:showAsAction="always"
+        android:id="@+id/notification"
+        tools:ignore="MenuTitle" />
+
+    <item
+        android:icon="@drawable/ic_baseline_search_24"
+        app:showAsAction="always"
+        android:id="@+id/search"
+        tools:ignore="MenuTitle" />
+
+    <item
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        app:showAsAction="always"
+        android:id="@+id/account"
+        tools:ignore="MenuTitle" />
+
+</menu>
+
+
+             .KT
+             
+package com.example.freshone
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.view.menu.MenuView.ItemView
+import androidx.appcompat.widget.Toolbar
+
+class four11 : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four11)
+
+        var toolbar = findViewById<Toolbar>(R.id.customtoolbar)
+        setSupportActionBar(toolbar)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_item,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId==R.id.cast)
+        {
+            Toast.makeText(this@four11, "Cast", Toast.LENGTH_SHORT).show()
+        }else if (item.itemId==R.id.notification)
+        {
+            Toast.makeText(this@four11, "Notification", Toast.LENGTH_SHORT).show()
+        }else if (item.itemId==R.id.search)
+        {
+            Toast.makeText(this@four11, "Search", Toast.LENGTH_SHORT).show()
+        }else if (item.itemId==R.id.account)
+        {
+            Toast.makeText(this@four11, "Account", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+}                                                   
+
+
+*******************************************************************
+four12
+                .XML 
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WebViewPractical">
+
+    <WebView
+        android:id="@+id/btn_web_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+
+
+               .KT
+               
+package com.example.freshone
+
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.webkit.WebView
+import android.webkit.WebViewClient
+
+class WebViewPractical : AppCompatActivity() {
+    lateinit var webview: WebView
+
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four12)
+
+        webview = findViewById<WebView>(R.id.btn_web_view)
+
+        webview.webViewClient = WebViewClient()
+        webview.loadUrl("https://www.gamil.com")
+
+        webview.settings.javaScriptEnabled = true
+
+        webview.settings.setSupportZoom(true)
+    }
+
+    override fun onBackPressed()
+    {
+        if (webview.canGoBack())
+        {
+            webview.goBack()
+        }
+        else
+        {
+            super.onBackPressed()
+        }
+    }
+}  
+
+**********************************************************************
+four13
+
+                       .XML 
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".four13">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="#2594EC"
+        android:padding="20dp"
+        android:id="@+id/btn_check_internet"
+        android:text="CHECK INTERNET"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+        
+</RelativeLayout>
+
+
+                      .KT
+                
+package com.example.freshone
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
+
+class four13 : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.four13)
+
+        var btn = findViewById<Button>(R.id.btn_check_internet)
+
+        btn.setOnClickListener {
+            var a = checkForInternet(applicationContext)
+            if (a==true)
+            {
+                Toast.makeText(this@four13, "network available", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                Toast.makeText(this@four13, "network not available",
+                Toast.LENGTH_SHORT).show()        
+            }
+        }
+    }
+    private fun checkForInternet(context: Context):Boolean{
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork =connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return  when{
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                else -> false
+            }
+        }
+        else
+        {
+            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
+            return networkInfo.isConnected
+        }
+    }
+}                             
+
+
