@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".login"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="56sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="25dp"
+        android:textColor="#09090B"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email"
+        android:layout_margin="30dp"
+        android:padding="30dp"
+        android:textColorHint="#020202"
+        android:textColor="#000"
+        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:drawablePadding="20dp">
+
+    </EditText>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Password"
+        android:layout_margin="30dp"
+        android:padding="30dp"
+        android:textColorHint="#020202"
+        android:textColor="#000"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="20dp">
+
+    </EditText>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="SIGN IN"
+        android:background="#B52B5A"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New User"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:textAlignment="center"/>
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="#2775B3"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot pswd?"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:textAlignment="center"/>
+    </LinearLayout>
+</LinearLayout>

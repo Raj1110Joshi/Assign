@@ -1,0 +1,86 @@
+			.XML
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#A9BC94"
+    tools:context=".Login_intent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="56dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:textAlignment="center"
+        android:textColor="#000">
+    </TextView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email"
+        android:layout_margin="30dp"
+        android:padding="30dp"
+        android:textColor="#000"
+        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:drawablePadding="20dp">
+    </EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Password"
+        android:layout_margin="30dp"
+        android:padding="30dp"
+        android:textColor="#000"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="20dp">
+    </EditText>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="SIGN IN">
+    </Button>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New user"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:textAlignment="center">
+        </TextView>
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="#CAAA4A"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forget pswd"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:textAlignment="center">
+        </TextView>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+			
+

@@ -1,0 +1,83 @@
+			.XML
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn1"
+        android:text="DEMO"
+        android:textSize="29dp"
+        >
+
+    </Button>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn2"
+        android:text="DEMO"
+        android:textSize="29dp"
+        >
+
+    </Button>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_timepicker"
+        android:text="Time Picker">
+
+    </Button>
+
+
+
+</LinearLayout>
+
+			.KT
+
+package com.example.demo
+
+import android.accounts.AccountManager.get
+import android.app.TimePickerDialog
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TimePicker
+import java.lang.reflect.Array.get
+import java.nio.file.Paths.get
+import java.util.*
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+    var btn_timepicker = findViewById<Button>(R.id.btn_timepicker)
+
+        btn_timepicker.setOnClickListener{
+            var t = TimePickerDialog(this@MainActivity,TimePickerDialog.OnTimeSetListener{
+                timePicker, i, i2 -> btn_timepicker.setText("$i : $i2")
+            },Calendar.get(Calendar.YEAR),Calendar.get(Calendar.MONTH),Calendar.get(Calendar.DAY_OF_MONTH))
+        }
+
+
+
+
+    }
+}
